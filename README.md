@@ -11,7 +11,7 @@ TestimonialsModule::install();
 ```
 
 ### Render the Module in a Template:
-Render Directly in Template with custom parameters.
+Render directly in template with custom parameters.
 ```
 TestimonialsModule::make(array(
     'template' => 'aside',
@@ -22,7 +22,7 @@ TestimonialsModule::make(array(
 ```
 
 ### Render the Module in a post:
-Add a shortcode for the Content Editor.
+Add a shortcode to the content editor.
 ```
 [module_testimonials "template"="main" search="Find me"]
 ```
