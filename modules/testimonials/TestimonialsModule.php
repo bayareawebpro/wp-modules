@@ -1,8 +1,16 @@
 <?php
-class TestimonialsModule extends AbstractWpContent{
-
+class TestimonialsModule extends AbstractWpModule{
+    /**
+     * Shortcode Name (optional)
+     * @var $shortcode string|false
+     */
     public static $shortcode = 'module_testimonials';
 
+    /**
+     * PostType Attributes (optional)
+     * Defines a new Post Type.
+     * @var $shortcode string|false
+     */
     public static $postType = array(
         'type'                  => 'module_testimonials',
         'label'                 => 'Testimonials',
