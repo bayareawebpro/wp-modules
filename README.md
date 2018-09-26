@@ -1,6 +1,16 @@
 # WpModules
 Modular Approach to WP Content
 
+Features Included:
+-WpQuery (accepts any standard argument or the ones provided)
+-Entry Transformations (transform each entry before it’s sent to the template)
+-Multiple Templates (specify a different template for each context)
+-Meta (automatically appended as properties)
+-Images (automatically appended as properties)
+-Assets Pushed to Footer & Inlined
+-Automatic Pagination
+
+
 ### Install the CustomPostType & Shortcode:
 Require the Abstract Module Class and your Modules which extend it in the functions file.
 ```
