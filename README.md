@@ -1,7 +1,7 @@
 # WpModules
 Modular Approach to WP Content
 
-## Install the CustomPostType & Shortcode
+## Install the CustomPostType & Shortcode:
 ```
 /** Content Type Modules. */
 require_once __DIR__.'/modules/AbstractModule.php';
@@ -9,7 +9,7 @@ require_once __DIR__.'/modules/testimonials/module.php';
 TestimonialsModule::install();
 ```
 
-## Render the Module in a Template.
+## Render the Module in a Template:
 Render Directly in Template with custom parameters.
 ```
 TestimonialsModule::make(array(
@@ -20,13 +20,26 @@ TestimonialsModule::make(array(
 ))->render();
 ```
 
-## Render the Module in a post.
+## Render the Module in a post:
 Add a shortcode for the Content Editor.
 ```
 [module_testimonials "template"="main" search="Find me"]
 ```
+## Module File Structure
+```
+modules
+AbstractModule.php
+    testimonials
+        module.php
+        assets
+            script.js
+            styles.css
+        views
+            aside.php
+            main.php
+```
 
-## Render the Module in a post.
+## Define a Module:
 ```
 class TestimonialsModule extends AbstractWpContent{
     /**
