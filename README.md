@@ -2,6 +2,7 @@
 Modular Approach to WP Content
 
 ### Install the CustomPostType & Shortcode:
+Require the Abstract Module Class and your Modules which extend it in the functions file.
 ```
 /** Content Type Modules. */
 require_once __DIR__.'/modules/AbstractWpModule.php';
