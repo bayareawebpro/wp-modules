@@ -4,8 +4,8 @@ Modular Approach to WP Content
 ### Install the CustomPostType & Shortcode:
 ```
 /** Content Type Modules. */
-require_once __DIR__.'/modules/AbstractModule.php';
-require_once __DIR__.'/modules/testimonials/module.php';
+require_once __DIR__.'/modules/AbstractWpModule.php';
+require_once __DIR__.'/modules/testimonials/TestimonialsModule.php';
 TestimonialsModule::install();
 ```
 
@@ -41,7 +41,7 @@ modules
 
 ## Define a Module:
 ```
-class TestimonialsModule extends AbstractWpContent{
+class TestimonialsModule extends AbstractWpModule{
  /**
      * Shortcode Name (optional)
      * @var $shortcode string|false
