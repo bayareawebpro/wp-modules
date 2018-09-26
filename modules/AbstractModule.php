@@ -4,7 +4,7 @@
  * Do not use this class directly.
  * Extend it and override anything needed.
  */
-abstract class AbstractWpContent
+abstract class AbstractWpModule
 {
     protected
         $content,
@@ -306,7 +306,7 @@ abstract class AbstractWpContent
      */
     protected function renderAssets(){
 
-        if($this->assetsQueued) return;
+        if($this->assetsQueued || count($this->assets) === 0) return;
         add_action('wp_print_footer_scripts', function(){
             try{
                 $assetPath =  get_stylesheet_directory().'/modules/'.$this->moduleDirectory().'/assets/';
