@@ -30,7 +30,7 @@ Add a shortcode for the Content Editor.
 modules
     AbstractModule.php
     testimonials
-        module.php
+        TestimonialsModule.php
         assets
             script.js
             styles.css
