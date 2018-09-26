@@ -28,7 +28,7 @@ Add a shortcode for the Content Editor.
 ### Module File Structure
 ```
 modules
-    AbstractModule.php
+    AbstractWpModule.php
     testimonials
         TestimonialsModule.php
         assets
