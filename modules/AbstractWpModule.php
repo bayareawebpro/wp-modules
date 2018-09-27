@@ -42,6 +42,12 @@ abstract class AbstractWpModule
     public $with = array('meta', 'images');
 
     /**
+     * Should Render Pagination by Default?
+     * @var $shouldRenderPagination bool
+     */
+    public $shouldRenderPagination = false;
+
+    /**
      * Default Content Transformations
      * @var $defaultAttributes array
      */
@@ -64,12 +70,6 @@ abstract class AbstractWpModule
         'updateTermCache' => false,
         'template' => 'default',
     );
-
-    /**
-     * Should Render Pagination by Default?
-     * @var $shouldRenderPagination bool
-     */
-    protected $shouldRenderPagination = false;
 
     /**
      * Attribute Input Map for clearly legible named parameters.
@@ -106,14 +106,12 @@ abstract class AbstractWpModule
      * Static Render Method (for direct usage instead of shortcode)
      * @param $attributes mixed
      * @param $content string
-     * @return $this
+     * @return string
      */
-    public static function make($attributes, $content = "")
+    public static function make($attributes = array(), $content = "")
     {
         $instance = new static();
-        $instance->shouldRender = false;
-        $instance->__invoke($attributes, $content);
-        return $instance;
+        return $instance->__invoke($attributes, $content);
     }
 
     /**
@@ -123,7 +121,7 @@ abstract class AbstractWpModule
      * @return mixed
      * @throws \Throwable
      */
-    public function __invoke($attributes, $content = "")
+    public function __invoke($attributes = array(), $content = "")
     {
         $this->filterAttributes($attributes);
         $this->filterContent($content);
@@ -164,17 +162,15 @@ abstract class AbstractWpModule
      */
     protected function filterAttributes($attributes)
     {
-
         if(count($attributes) && strpos($attributes[0], '=')){
             $this->attributes = shortcode_atts($this->defaultAttributes, $attributes);
         }else{
             //Merge the Attributes with the defaults.
             $this->attributes = array_merge($this->defaultAttributes, $attributes);
         }
-
         //Pluck the template setting from the attributes.
         if (isset($this->attributes['template'])) {
-            $this->template = $attributes['template'];
+            $this->template = $this->attributes['template'];
             unset($this->attributes['template']);
         }
 
@@ -204,6 +200,7 @@ abstract class AbstractWpModule
                 $this->attributes[$key] = $value;
             }
         }
+
     }
 
     /**
@@ -288,15 +285,13 @@ abstract class AbstractWpModule
      */
     public function render()
     {
-        if($this->shouldRender){
-            $template = 'modules/' . $this->moduleDirectory() . '/views/' . $this->template . '.php';
-            $path = locate_template($template, false, false);
-            //Include the Template in Isolation & Echo the String.
-            ob_start();
-            require($path);
-            $this->rendered = ob_get_clean();
-            $this->renderAssets();
-        }
+        $template = 'modules/' . $this->moduleDirectory() . '/views/' . $this->template . '.php';
+        $path = locate_template($template, false, false);
+        //Include the Template in Isolation & Echo the String.
+        ob_start();
+        require($path);
+        $this->rendered = ob_get_clean();
+        $this->renderAssets();
         wp_reset_postdata();
     }
 
@@ -413,7 +408,7 @@ abstract class AbstractWpModule
 
         if ($this->hasNextPage()) {
             $nextLink =  next_posts($this->wpdb->max_num_pages, false);
-            $links .= '<a href="'.$nextLink .'" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Next</a>';
+            $links .= '<a href="'.$nextLink .'" class="btn btn-primary">Next <i class="fa fa-arrow-right"></i></a>';
         }
 
         $links .= '</div>';
