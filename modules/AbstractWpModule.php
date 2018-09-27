@@ -10,7 +10,6 @@ abstract class AbstractWpModule
         $content,
         $wpdb,
         $template = null,
-        $shouldRender = true,
         $rendered = null,
         $assetsQueued = false,
         $attributes = array(),
