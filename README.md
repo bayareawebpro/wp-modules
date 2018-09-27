@@ -28,7 +28,7 @@ TestimonialsModule::make(array(
     'search' => 'My New',
     'paginate' => 3,
     'pagination' => true,
-))->render();
+));
 ```
 
 ### Render the Module in a post:
